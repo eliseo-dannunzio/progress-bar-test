@@ -1,0 +1,37 @@
+<script type="text/javascript" src="./jquery.js"></script>
+<script type="text/javascript" src="./ractive.js"></script>
+
+<div id='container'></div>
+<script id="template" type='text/ractive'>
+    
+   <h1>Progress Bar Assignment by Eliseo D'Annunzio</h1>
+
+      {{#each progressbars}} 
+        <div class="progress-border" id="{{name}}">
+          {{#if value <= 100}}
+            <div class="progress-bar-fill" style="width: {{setValue(value)}}%">
+              <span class="progress-label" style="left: {{theLeft()}}px;">{{setValue(value)}}%</span>
+            </div>
+          {{/if}}
+          {{#if value>100}}
+            <div class="progress-bar-fill-red" style="width: 100%">
+              <span class="progress-label" style="left: {{theLeft()}}px;">{{value}}%</span>
+            </div>
+          {{/if}}
+        </div>
+      {{/each}}
+
+    <select value='{{selectedProgress}}'>
+      <option selected disabled>Select something</option>
+      {{#each progressbars :index}}
+        <option value='{{index}}'>{{name}}</option>
+      {{/each}}
+    </select>
+
+    {{#each amounts}}
+      <button disabled='{{selectedProgress == null}}' on-click='adjust(this)'>{{this > 0 ? '+' : ''}}{{this}}</button>
+    {{/each}}
+</script>
+
+<script type="text/javascript" src="./jscript.js"></script>
+<link rel="stylesheet" type="text/css" href="./styles.css" />
